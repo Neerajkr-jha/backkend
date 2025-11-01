@@ -22,10 +22,10 @@ mongoose.connect(process.env.MONGO_URL)
 
 //  CORS setup for Netlify + local
 app.use(cors({
-  origin: [
-    'https://admirable-duckanoo-041bb9.netlify.app' // ✅ your live frontend
-  ],
-  credentials: true
+  origin: 'https://admirable-duckanoo-041bb9.netlify.app',
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 }));
 
 //  Middlewares

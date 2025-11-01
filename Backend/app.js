@@ -21,24 +21,12 @@ mongoose.connect(process.env.MONGO_URL)
   .catch(err => console.error("❌ MongoDB connection error:", err));
 
 //  CORS setup for Netlify + local
-const allowedOrigins = [
-  'http://localhost:5173',
-  'https://admirable-duckanoo-041bb9.netlify.app'
-];
-
 app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like Postman)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
+  origin: [
+    'https://admirable-duckanoo-041bb9.netlify.app' // ✅ your live frontend
+  ],
+  credentials: true
 }));
-
 
 //  Middlewares
 app.use(express.urlencoded({ extended: false }));

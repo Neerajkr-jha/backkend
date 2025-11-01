@@ -20,12 +20,16 @@ mongoose.connect(process.env.MONGO_URL)
   .then(() => console.log("✅ MongoDB connected successfully"))
   .catch(err => console.error("❌ MongoDB connection error:", err));
 
+
+ const FRONTEND_URL = process.env.FRONTEND_URL || 'https://admirable-duckanoo-041bb9.netlify.app';
+
+console.log('🌐 CORS configured for:', FRONTEND_URL); // This will appear in Render logs
 //  CORS setup for Netlify + local
 app.use(cors({
-  origin: 'https://admirable-duckanoo-041bb9.netlify.app',
+  origin: FRONTEND_URL,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie']
 }));
 
 //  Middlewares
